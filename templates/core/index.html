@@ -1,0 +1,58 @@
+<!-- templates/core/index.html -->
+{% extends 'core/base.html' %}
+{% block title %}Home - My Portfolio{% endblock %}
+{% block content %}
+
+<section id="intro" class="text-center mb-5">
+  <h1 class="text-lime">Hey, I'm a Django Developer</h1>
+  <p class="lead">Welcome to my personal portfolio.</p>
+</section>
+
+<section id="about" class="mb-5">
+  <h2 class="text-lime">About Me</h2>
+  <p>I’m a full-stack developer passionate about clean code and creative solutions.</p>
+</section>
+
+<section id="experience" class="mb-5">
+  <h2 class="text-lime">Experience</h2>
+  <ul>
+    <li>3+ years building web applications</li>
+    <li>Django, Flask, REST APIs</li>
+    <li>Bootstrap, JS, PostgreSQL</li>
+  </ul>
+</section>
+
+<section id="skills" class="mb-5">
+  <h2 class="text-lime">Skills</h2>
+  <div class="row">
+    <div class="col-6 col-md-3 mb-2">Python</div>
+    <div class="col-6 col-md-3 mb-2">Django</div>
+    <div class="col-6 col-md-3 mb-2">Bootstrap</div>
+    <div class="col-6 col-md-3 mb-2">JavaScript</div>
+  </div>
+</section>
+
+<section id="projects" class="mb-5">
+  <h2 class="text-lime">Projects</h2>
+  <div class="row">
+    {% for project in projects %}
+    <div class="col-md-4 mb-4">
+      <div class="card h-100">
+        <img src="{{ project.image.url }}" class="card-img-top" alt="{{ project.title }}">
+        <div class="card-body">
+          <h5 class="card-title">{{ project.title }}</h5>
+          <p class="card-text">{{ project.description|truncatewords:20 }}</p>
+          <a href="{% url 'project_detail' project.pk %}" class="btn btn-lime text-white" style="background-color: #32CD32;">View Details</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section id="contact" class="mb-5">
+  <h2 class="text-lime">Contact Me</h2>
+  <p>Email: <a href="mailto:your@email.com">nuhad7july02@email.com</a></p>
+</section>
+
+{% endblock %}

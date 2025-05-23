@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="section-content py-5" style="background-color: #f8f9fa;">
+  <div class="container">
+
+    <div class="card border-0 shadow-lg mb-4">
+      <div class="row g-0">
+        <!-- Project Image -->
+        <aside class="col-md-6 text-center p-4">
+          <img src="{{ project.image.url }}" class="img-fluid rounded" alt="{{ project.title }}">
+        </aside>
+
+        <!-- Project Content -->
+        <main class="col-md-6 p-4">
+          <article>
+            <h2 class="text-success fw-bold">{{ project.title }}</h2>
+            <p class="text-muted">{{ project.description }}</p>
+
+            <hr>
+
+            <!-- Project Links -->
+            <div class="d-flex flex-wrap gap-2 my-3">
+              {% if project.live_link %}
+              <a href="{{ project.live_link }}" target="_blank" class="btn btn-success">
+                <i class="fa-solid fa-globe"></i> Live Project
+              </a>
+              {% endif %}
+              {% if project.source_code %}
+              <a href="{{ project.source_code }}" target="_blank" class="btn btn-outline-success">
+                <i class="fa-brands fa-github"></i> View Code
+              </a>
+              {% endif %}
+            </div>
+
+            <!-- Project Technologies -->
+            {% if project.technologies.all %}
+            <div class="mt-4">
+              <h6 class="text-success">Technologies Used:</h6>
+              <div class="d-flex flex-wrap gap-2 mt-2">
+                {% for tech in project.technologies.all %}
+                <span class="badge bg-success-subtle text-success border border-success px-3 py-2">{{ tech.name }}</span>
+                {% endfor %}
+              </div>
+            </div>
+            {% endif %}
+          </article>
+        </main>
+      </div>
+    </div>
+
+    <!-- Review Form -->
+    <div class="card shadow-sm p-4 mb-4">
+      <h4 class="mb-3 text-success">Leave a Review</h4>
+      <form method="POST" action="{% url 'submit_review' project.id %}">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="rating" class="form-label">Rating (1-5)</label>
+          <select id="rating" name="rating" class="form-select" required>
+            <option value="" selected disabled>Select rating</option>
+            {% for i in "12345" %}
+            <option value="{{ i }}">{{ i }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="subject" class="form-label">Review Title</label>
+          <input type="text" id="subject" name="subject" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="review" class="form-label">Review</label>
+          <textarea id="review" name="review" rows="4" class="form-control" required></textarea>
+        </div>
+
+        {% if user.is_authenticated %}
+          <button type="submit" class="btn btn-success">Submit Review</button>
+        {% else %}
+          <p class="text-danger">You must be <a href="{% url 'login' %}">logged in</a> to submit a review.</p>
+        {% endif %}
+      </form>
+    </div>
+
+    <!-- Reviews List -->
+    <div class="card shadow-sm p-4">
+      <h4 class="mb-3 text-success">Customer Reviews ({{ reviews.count }})</h4>
+      {% for review in reviews %}
+      <article class="mb-3 border-bottom pb-3">
+        <div class="d-flex justify-content-between align-items-center mb-1">
+          <strong>{{ review.user.get_full_name }}</strong>
+          <small class="text-muted">{{ review.created_at|date:"M d, Y" }}</small>
+        </div>
+        <div class="mb-1">
+          <span class="text-warning">
+            {% for star in "12345" %}
+              {% if star|int <= review.rating %}
+                <i class="fa-solid fa-star"></i>
+              {% else %}
+                <i class="fa-regular fa-star"></i>
+              {% endif %}
+            {% endfor %}
+          </span>
+        </div>
+        <h6>{{ review.subject }}</h6>
+        <p>{{ review.review }}</p>
+      </article>
+      {% empty %}
+      <p>No reviews yet. Be the first to review this project!</p>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+{% endblock %}
