@@ -3,9 +3,19 @@
 {% block title %}Home - My Portfolio{% endblock %}
 {% block content %}
 
-<section id="intro" class="text-center mb-5">
-  <h1 class="text-lime">Hi, I'm Sabahat</h1>
-  <p class="lead">I'm a full-stack Web Developer.</p>
+<!-- SECTION: INTRO / BANNER -->
+<section id="intro" class="py-5 bg-light">
+  <div class="container">
+    <div class="row align-items-center flex-column-reverse flex-lg-row">
+      <div class="col-lg-6 text-center text-lg-start">
+        <h1 class="display-5 fw-bold">Hi, I'm <span class="text-primary">Sabahat</span></h1>
+        <p class="lead">I'm a full-stack Web Developer.</p>
+      </div>
+      <div class="col-lg-6 text-center">
+        <img src="{% static 'images/banner.jpg' %}" class="img-fluid rounded" alt="Banner Image">
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- About Section -->
