@@ -8,7 +8,7 @@ def home(request):
         'skills': Skill.objects.all(),
         'projects': Project.objects.all(),
     }
-    return render(request, 'core/home.html', context)
+    return render(request, 'core/index.html', context)
 
 def project_detail(request, slug):
     project = get_object_or_404(Project, slug=slug)
