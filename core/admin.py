@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import About, Experience, Skill, Project, Review, NavbarBrand, NavbarLink, FooterInfo
+from .models import About, Experience, Skill, Project, Review, NavbarBrand, NavbarLink, FooterInfo, ContactSetting
 
 admin.site.register(About)
 @admin.register(Experience)
@@ -19,3 +19,6 @@ admin.site.register(Review)
 admin.site.register(NavbarLink)
 admin.site.register(NavbarBrand)
 admin.site.register(FooterInfo)
+@admin.register(ContactSetting)
+class ContactSettingAdmin(admin.ModelAdmin):
+    list_display = ['email_receiver']

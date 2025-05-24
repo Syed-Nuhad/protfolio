@@ -113,3 +113,12 @@ class FooterInfo(models.Model):
 
     def __str__(self):
         return "Footer Info"
+class ContactSetting(models.Model):
+    email_receiver = models.EmailField()
+
+    def __str__(self):
+        return f"Receiver Email: {self.email_receiver}"
+
+    class Meta:
+        verbose_name = "Contact Email Setting"
+        verbose_name_plural = "Contact Email Settings"

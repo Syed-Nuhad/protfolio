@@ -30,13 +30,15 @@
       border-top: 1px solid #ccc;
       margin: 2rem 0;
     }
+
     .card:hover .card-body {
-        border-color: #0d6efd !important; /* Bootstrap Primary */
-        box-shadow: 0 0 15px rgba(13, 110, 253, 0.4);
-      }
-    .navbar-brand{
+      border-color: #0d6efd !important;
+      box-shadow: 0 0 15px rgba(13, 110, 253, 0.4);
+    }
+
+    .navbar-brand {
       color: #0d6efd !important;
-      text-underline: none;
+      text-decoration: none;
     }
   </style>
 </head>
@@ -48,7 +50,7 @@
     <a class="navbar-brand fw-bold" href="#">
       {{ navbar_brand.brand_name|default:"Sabahat" }}
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="mainNav">
@@ -63,20 +65,55 @@
   </div>
 </nav>
 
-<!-- Content -->
-<main class="container py-5">
+<!-- MAIN CONTENT -->
+<main class="container-fluid px-3 px-md-5 py-5">
   {% block content %}
   {% endblock %}
 </main>
 
-<!-- Divider before footer -->
+<!-- SECTION DIVIDER -->
 <hr class="section-divider">
 
-<!-- Footer -->
-<footer class="bg-primary text-white text-center py-3 mt-3">
-  &copy; 2025 Syed Nuhad. All rights reserved.
+<!-- FOOTER -->
+<footer class="bg-light text-dark py-4 mt-5">
+  <div class="container">
+    <div class="row text-center text-md-start">
+      <div class="col-12 col-md-4 mb-4">
+        <h5>Contact</h5>
+        <p><strong>Email:</strong> {{ footer_info.email }}</p>
+        <p><strong>Phone:</strong> {{ footer_info.phone }}</p>
+        <p><strong>Address:</strong><br> {{ footer_info.address }}</p>
+      </div>
+
+      <div class="col-12 col-md-4 mb-4">
+        <h5>Quick Links</h5>
+        <ul class="list-unstyled">
+          <li><a href="#intro" class="text-decoration-none text-dark">Intro</a></li>
+          <li><a href="#about" class="text-decoration-none text-dark">About</a></li>
+          <li><a href="#experience" class="text-decoration-none text-dark">Experience</a></li>
+          <li><a href="#skills" class="text-decoration-none text-dark">Skills</a></li>
+          <li><a href="#projects" class="text-decoration-none text-dark">Projects</a></li>
+          <li><a href="#contact" class="text-decoration-none text-dark">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="col-12 col-md-4 mb-4">
+        <h5>Follow Me</h5>
+        <div class="d-flex justify-content-center justify-content-md-start gap-3">
+          <a href="{{ footer_info.github }}" class="text-dark" target="_blank"><i class="fab fa-github fa-lg"></i></a>
+          <a href="{{ footer_info.linkedin }}" class="text-dark" target="_blank"><i class="fab fa-linkedin fa-lg"></i></a>
+          <a href="{{ footer_info.facebook }}" class="text-dark" target="_blank"><i class="fab fa-facebook fa-lg"></i></a>
+          <a href="{{ footer_info.twitter }}" class="text-dark" target="_blank"><i class="fab fa-twitter fa-lg"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+    <p class="text-center mb-0">© {{ navbar_brand.brand_name }} {% now "Y" %} | All Rights Reserved</p>
+  </div>
 </footer>
 
+<!-- JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
