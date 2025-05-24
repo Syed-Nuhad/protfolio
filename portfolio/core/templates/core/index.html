@@ -1,0 +1,93 @@
+<!-- templates/core/index.html -->
+{% extends 'core/base.html' %}
+{% block title %}Home - My Portfolio{% endblock %}
+{% block content %}
+
+<section id="intro" class="text-center mb-5">
+  <h1 class="text-lime">Hey, I'm a Django Developer</h1>
+  <p class="lead">Welcome to my personal portfolio.</p>
+</section>
+
+<!-- About Section -->
+<section id="about" class="mb-5 container">
+  <div class="text-center">
+    <h2 class="text-lime display-5 fw-bold mb-3">About Me</h2>
+    <p class="lead">I'm a full-stack developer who loves clean code, creative solutions, and building experiences that matter. I specialize in Python-based web development and thrive on turning ideas into real-world applications.</p>
+  </div>
+</section>
+
+<!-- Experience Section -->
+<section id="experience" class="mb-5 container">
+  <div class="text-center">
+    <h2 class="text-lime display-5 fw-bold mb-3">Experience</h2>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">💻 3+ years building full-stack web applications</li>
+        <li class="list-group-item">⚙️ Backend: Django, Flask, REST APIs</li>
+        <li class="list-group-item">🎨 Frontend: Bootstrap, JavaScript, HTML5</li>
+        <li class="list-group-item">🗃️ Database: PostgreSQL, SQLite</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Skills Section -->
+<section id="skills" class="mb-5 container">
+  <div class="text-center mb-4">
+    <h2 class="text-lime display-5 fw-bold">Skills</h2>
+  </div>
+  <div class="row text-center gy-3">
+    <div class="col-6 col-md-3">
+      <div class="border p-3 rounded shadow-sm">🐍 Python</div>
+    </div>
+    <div class="col-6 col-md-3">
+      <div class="border p-3 rounded shadow-sm">🌐 Django</div>
+    </div>
+    <div class="col-6 col-md-3">
+      <div class="border p-3 rounded shadow-sm">🎨 Bootstrap</div>
+    </div>
+    <div class="col-6 col-md-3">
+      <div class="border p-3 rounded shadow-sm">💡 JavaScript</div>
+    </div>
+    <div class="col-6 col-md-3">
+      <div class="border p-3 rounded shadow-sm">🧪 Flask</div>
+    </div>
+    <div class="col-6 col-md-3">
+      <div class="border p-3 rounded shadow-sm">🔌 REST APIs</div>
+    </div>
+    <div class="col-6 col-md-3">
+      <div class="border p-3 rounded shadow-sm">📦 PostgreSQL</div>
+    </div>
+    <div class="col-6 col-md-3">
+      <div class="border p-3 rounded shadow-sm">🧠 Git & GitHub</div>
+    </div>
+  </div>
+</section>
+
+
+<section id="projects" class="mb-5">
+  <h2 class="text-lime">Projects</h2>
+  <div class="row">
+    {% for project in projects %}
+    <div class="col-md-4 mb-4">
+      <div class="card h-100">
+        <img src="{{ project.image.url }}" class="card-img-top" alt="{{ project.title }}">
+        <div class="card-body">
+          <h5 class="card-title">{{ project.title }}</h5>
+          <p class="card-text">{{ project.description|truncatewords:20 }}</p>
+          <a href="{% url 'project_detail' project.pk %}" class="btn btn-lime text-white" style="background-color: #32CD32;">View Details</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section id="contact" class="mb-5">
+  <h2 class="text-lime">Contact Me</h2>
+  <p>Email: <a href="mailto:your@email.com">nuhad7july02@email.com</a></p>
+</section>
+
+{% endblock %}
