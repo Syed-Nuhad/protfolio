@@ -18,27 +18,39 @@
   </div>
 </section>
 
-<!-- About Section -->
-<section id="about" class="mb-5 container">
-  <div class="text-center">
-    <h2 class="text-lime display-5 fw-bold mb-3">About Me</h2>
-    <p class="lead">I'm a full-stack Web developer who loves clean code, creative solutions, and building experiences that matter. I specialize in Python-based web development and thrive on turning ideas into real-world applications.</p>
+<!-- SECTION: ABOUT -->
+<section id="about" class="py-5 bg-white">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <h2 class="fw-bold mb-3">About Me</h2>
+        <p class="lead">I'm a full-stack Web developer who loves clean code, creative solutions, and building experiences that matter. I specialize in Python-based web development and thrive on turning ideas into real-world applications.</p>
+      </div>
+      <div class="col-lg-6 text-center">
+        <img src="{{ about.image.url }}" class="rounded-circle img-fluid shadow" alt="About Image" style="width: 250px; height: 250px; object-fit: cover;">
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- Experience Section -->
-<section id="experience" class="mb-5 container">
-  <div class="text-center">
-    <h2 class="text-lime display-5 fw-bold mb-3">My Experience</h2>
-  </div>
-  <div class="row justify-content-center">
-    <div class="col-md-8">
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item">💻 3+ years building full-stack web applications</li>
-        <li class="list-group-item">⚙️ Backend: Django, Flask, REST APIs</li>
-        <li class="list-group-item">🎨 Frontend: Bootstrap, JavaScript, HTML5</li>
-        <li class="list-group-item">🗃️ Database: PostgreSQL, SQLite</li>
-      </ul>
+
+<!-- SECTION: EXPERIENCE -->
+<section id="experience" class="py-5 bg-light">
+  <div class="container">
+    <h2 class="text-center fw-bold mb-4">Experience</h2>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+      {% for exp in experiences %}
+      <div class="col">
+        <div class="card h-100 shadow-sm border-0 transition hover-shadow" style="transition: 0.3s ease;">
+          <div class="card-body text-center border border-2 border-transparent rounded" style="transition: 0.3s;">
+            <h5 class="card-title text-primary fw-semibold">{{ exp.title }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{ exp.company }}</h6>
+            <p class="card-text">{{ exp.description|truncatewords:20 }}</p>
+            <small class="text-muted">{{ exp.duration }}</small>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
     </div>
   </div>
 </section>
